@@ -24,7 +24,7 @@ def mittelwert(daten):
 def standartabweichung(daten, mu):
     return sum((datum - mu) ** 2 for datum in daten) / (len(daten) - 1)
 
-klasse = set(trainingsdatenzeile[-1] for trainingsdatenzeile in trainingsdaten)
+klassen = set(trainingsdatenzeile[-1] for trainingsdatenzeile in trainingsdaten)
 
 trainingsdaten_pro_klasse = {klasse: [trainingsdatenzeile[:-1] for trainingsdatenzeile in trainingsdaten if trainingsdatenzeile[-1] == klasse] for klasse in klassen} 
 
