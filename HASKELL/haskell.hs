@@ -49,18 +49,17 @@ zweites (x:y:ys) = y
 
 länge :: [Int] -> Int
 länge [] = 0
-länge [x] = 1
 länge (x:xs) = länge xs + 1
 
 
 summe :: [Int] -> Int 
 summe [] = 0
-summe [x] = x 
-summe (x:xs) = summe xs + x
+summe (x:xs) = x + summe xs
 
 gib :: [Int] -> Int -> Int
-gib [] = error "Liste leer"
-gib n = gib  
+gib []= error "Liste leer"
+gib (x:xs) 0 = 1  
+gib (x:xs) i = gib xs (i-1)
 
 --entfernen :: [Int] -> Int -> Int
 
