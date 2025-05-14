@@ -42,10 +42,14 @@ letztes [] = error "leere Liste"
 letztes [x] = x
 letztes (x:xs) = letztes xs
 
+-- zweites :: [Int] -> Int
+-- zweites [] =  error "Liste zu kurz!"
+-- zweites [x] = error "Liste zu kurz!"
+-- zweites (x:y:ys) = y
+
 zweites :: [Int] -> Int
-zweites [] =  error "Liste zu kurz!"
-zweites [x] = error "Liste zu kurz!"
 zweites (x:y:ys) = y
+zweites _ = error "Liste zu kurz!"
 
 länge :: [Int] -> Int
 länge [] = 0
