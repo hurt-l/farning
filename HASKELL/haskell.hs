@@ -21,7 +21,6 @@ summe_0_bis :: Int -> Int
 summe_0_bis 0 = 0
 summe_0_bis n = n + summe_0_bis (n-1)
 
-
 hoch :: Int -> Int -> Int
 hoch n m = n ^ m
 
@@ -65,6 +64,63 @@ gib []= error "Liste leer"
 gib (x:xs) 0 = 1  
 gib (x:xs) i = gib xs (i-1)
 
---entfernen :: [Int] -> Int -> Int
+größer :: Int -> Int -> Bool
+größer x y
+| x > y = True
+| otherwise = False
 
---einfügen :: [Int] -> Int -> Int -> [Int]
+entfernen :: [Int] -> Int -> [Int]
+entfernen [] _ = error "Indexfehler!"
+entfernen (x:xs) 0 = xs
+entfernen (x:xs) i = x:entfernen xs (i-1)
+
+einfügen :: [Int] -> Int -> Int -> [Int]
+einfügen [] 0 y = [y]
+einfügen [] _ _ = error "Indexfehler!"
+
+anzahl :: [Int] -> Int -> Int
+anzahl [] = 0
+anzahl (x:xs) ys
+    |x == y = 1 + anzahl xs + y
+    | otherwise = anzahl xs y
+
+größtes :: [Int] -> Int
+größtes [] = error "Liste leer!"
+größtes [x] = x
+größtes (x:xs) 
+    | x > größtes_xs = x
+    | otherwise = größtes_xs
+    where größtes_xs = größtes xs
+
+kleinstes :: [Int] -> Int
+kleinstes [] = error "Liste leer"
+kleinstes [x] = xs
+kleinstes (x:xs)
+    | x < kleintes_xs = x
+    | otherwise = kleinstes_xs
+    where kleinstes_xs = kleinstes xs
+
+enthält :: [Int] -> Int -> [Int]
+enthält x y = anzahl x y > 0
+
+löschen :: [Int] -> Int -> [Int]
+löschen [] _ = error "Liste leer!"
+löschen (x:xs) y
+    | x == y = xs
+    | otherwise = x:löschen xs y
+
+löschenAlle :: [Int] -> Int -> [Int]
+löschenAlle [] = error "Liste leer!"
+löschenAlle (x:xs) y
+    | x == y löschenAlle xs y 
+    | otherwise = x:löschenAlle xs y
+
+index
+
+umdrehen
+
+sortiert
+
+einsBisN
+
+sortieren
