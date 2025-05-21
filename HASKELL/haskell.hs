@@ -66,8 +66,8 @@ gib (x:xs) i = gib xs (i-1)
 
 größer :: Int -> Int -> Bool
 größer x y
-| x > y = True
-| otherwise = False
+  | x > y     = True
+  | otherwise = False
 
 entfernen :: [Int] -> Int -> [Int]
 entfernen [] _ = error "Indexfehler!"
@@ -112,15 +112,27 @@ löschen (x:xs) y
 löschenAlle :: [Int] -> Int -> [Int]
 löschenAlle [] = error "Liste leer!"
 löschenAlle (x:xs) y
-    | x == y löschenAlle xs y 
+    | x == y = löschenAlle xs y 
     | otherwise = x:löschenAlle xs y
 
-index
+index :: [Int] -> Int -> Int
+index [] _ = error "Element nicht gefunden!"
+index (x:xs) y
+    | x == y = 0
+    | otherwise = index xs y + 1
 
-umdrehen
+letzterIndex :: [Int] -> Int -> Int
+letzterIndex [] _ = error "Element nicht gefunden!"
+letzterIndex x y = index umdrehen x y + länge x - 1
 
-sortiert
+umdrehen :: [Int] -> [Int]
+umdrehen [] = []
+umdrehen (x:xs) = umdrehen xs ++ [x]
 
-einsBisN
+sortiert :: [Int] -> Bool
+sortiert [] = error "Liste leer!"
+sortiert (x:xs) 
 
-sortieren
+einsBisN :: Int -> [Int]
+
+sortieren :: [Int] -> [Int]
