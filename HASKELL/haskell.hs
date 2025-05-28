@@ -94,7 +94,7 @@ größtes (x:xs)
 
 kleinstes :: [Int] -> Int
 kleinstes [] = error "Liste leer"
-kleinstes [x] = xs
+kleinstes [x] = x
 kleinstes (x:xs)
     | x < kleintes_xs = x
     | otherwise = kleinstes_xs
@@ -123,7 +123,7 @@ index (x:xs) y
 
 letzterIndex :: [Int] -> Int -> Int
 letzterIndex [] _ = error "Element nicht gefunden!"
-letzterIndex x y = index umdrehen x y + länge x - 1
+letzterIndex x y = länge x - 1 - index (umdrehen x) y
 
 umdrehen :: [Int] -> [Int]
 umdrehen [] = []
@@ -131,8 +131,27 @@ umdrehen (x:xs) = umdrehen xs ++ [x]
 
 sortiert :: [Int] -> Bool
 sortiert [] = error "Liste leer!"
-sortiert (x:xs) 
+sortiert [_] = True
+sortiert (x:y:xs) 
+    | x <= y = sortiert (y:xs)
+    | otherwise = False
 
 einsBisN :: Int -> [Int]
+einsBisN n 
+    |n < 1 = error "Nicht möglich"
+    |n == 1 = [1]
+    |otherwise = einfügen (einsBisN (n-1)) (n-1) n
 
 sortieren :: [Int] -> [Int]
+sortieren [] = "Liste leer!"
+sortieren (x:xs) = sortieren xs (kleinstes (x:xs)) ++ [x]
+
+zweitkleinstes :: [Int] -> Int
+zweitkleinstes (x:y:z:zs)
+zweitkleinstes [x, y]
+    |x < y = ys
+    |otherwise = xs
+zweitkleinstes (x:y:z:zs)
+    |x <= y && y <= z = zweitkleinstes (x:y:zs)
+    |X <= y && z <= y = zweitkleinstes (x:z:xs)
+    otherwise zweitkleinstes (y:z:zs)
