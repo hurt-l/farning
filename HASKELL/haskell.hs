@@ -166,17 +166,31 @@ zweitkleinstes (x:y:z:zs)
 komprimieren :: [Char] -> [Char]
 komprimieren [x] = [x]
 komprimieren(x:y:ys)
-    | x == y komprimieren (y:ys)
+    | x == y = komprimieren (y:ys)
     | otherwise = x:komprimieren (y:ys)
 
 anzahlen :: [Char] -> [Int]
 anzahlen [] = []
-anzahlen [] = [1]
+anzahlen [x] = [1]
 anzahlen (x:y:ys)
-    |x == y = anzahlen y ys + 1
-    |otherwise = 
+    |x == y = head anzahlenTail + 1 : tail anzahlenTail
+    |otherwise = 1:anzahlen (y:ys)
+    where anzahlenTail = anzahlen (y:ys)
 
+packen :: [Char] -> [[Char]] 
+packen [] = []
+packen [x] = [[x]]
+packen (x:y:ys)
+    | x == y = (x:head packenTail) : tail packenTail
+    |otherwise = [x]:packenTail
+    where packenTail = packen (y:ys)
 
-packen ::
+entpacken :: [[Char]] -> [Char]
+entpacken [] = []
+entpacken (x:xs) = x ++ entpacken xs
 
-entpacken ::                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+lauflängenkodierung :: [Char] -> [(Char,Int)]
+lauflängenkodierung [] = []
+lauflängenkodierung xs = (head (anzahlen xs), head (komprimieren xs)):lauflängenkodierung []
+
+lauflängendekodierung :: [(Int,Char)] -> [Char]
