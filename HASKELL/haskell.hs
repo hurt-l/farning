@@ -191,6 +191,19 @@ entpacken (x:xs) = x ++ entpacken xs
 
 lauflängenkodierung :: [Char] -> [(Char,Int)]
 lauflängenkodierung [] = []
-lauflängenkodierung xs = (head (anzahlen xs), head (komprimieren xs)):lauflängenkodierung []
+lauflängenkodierung xs = (head (anzahlen xs), head xs):lauflängenkodierung entpacken tail packen xs
+
+replizieren :: Int -> Char -> [Char]
+replizieren 0 _ = []
+replizieren x a = a:replizieren (x - 1) a
 
 lauflängendekodierung :: [(Int,Char)] -> [Char]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+zipper :: [a] -> [b]-> [(a,b)]
+zipper (a:as) (b:bs) = (a, b):zipper xs ys
+
+filterer :: (a -> Bool) -> [a] -> [b]
+filterer _ [] = []
+filterer f (x:xs)
+    | f x = x:filterer f xs
+    | otherwise = filterer f xs
