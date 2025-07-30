@@ -222,7 +222,7 @@ folderl f x (y:ys) = f folderl (f x y) ys
 
 folderr :: (a -> b -> b) -> b -> [a] -> b
 folderr _ x [] = x 
-folderr f x (y:ys) = f x (folderr f x ys)
+folderr f x (y:ys) = f y (folderr f x ys)
 
 flipper :: (a -> b -> c) -> (b -> a -> c)
 flipper
@@ -239,4 +239,16 @@ verdoppeln = mapper (*2)
 
 enthalten :: [Int] -> Int -> Bool
 enthalten [] = error "Liste leer"
-enthalten (y:ys) x = filterer (x) 
+enthalten xs y = filterer (\a b -> a == y) xs /= []
+
+maximum2 :: [Int] -> Int
+maximum2 [] = []
+maximum2 (x:xs) folderl (\a b -> if a >= b then a else b) x xs
+
+umdrehen2 :: [Int] -> [Int]
+umdrehen2 [] = []
+umdrehen2 (x:xs) = folderr (++) [x] [umdrehen2 xs]
+
+quicksort :: [Int] -> [Int]
+quicksort [] = []
+quicksort (x:xs) = quicksort (filterer (<x) xs) ++  [x] ++ quicksort (filterer))
